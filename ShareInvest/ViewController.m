@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "NetWorkManager.h"
-
+#import "LastingData.h"
 @interface ViewController ()<UITextFieldDelegate>
 {
     float curShareNum;
@@ -16,6 +16,7 @@
     float curRate;
     float addMoney;
     NSString* seekString;
+    LastingData* lastingData;
 }
 @property (weak, nonatomic) IBOutlet UILabel *openLab;
 @property (weak, nonatomic) IBOutlet UILabel *curLab;
@@ -23,28 +24,32 @@
 @property (nonatomic, strong) NetWorkManager* manager;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLab;
 @property (weak, nonatomic) IBOutlet UILabel *totalMony;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UILabel *shareNumLab;
 
-@property (weak, nonatomic) IBOutlet UILabel *seekLab;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    lastingData = [LastingData shareInstance];
     [self setClock];
     [self find];
     [self setTotalMoney];
     [self setupNet];
-    [self setUpTextField];
+    self.shareNumLab.text = lastingData.shareNum;
     
+}
+- (IBAction)returnTouch:(UIButton *)sender {
+    UIViewController *vc = [[UIStoryboard storyboardWithName:@"SetStoryboard" bundle:nil] instantiateInitialViewController];
+    [UIApplication sharedApplication].keyWindow.rootViewController = vc;
 }
 
 - (void) setupNet{
     self.manager = [[NetWorkManager alloc] init];
-    [self.manager getShareNum];
+    [self.manager getCurDataFromShareNumber:lastingData.shareNum];
     __weak typeof(self) weakSelf = self;
-    self.manager.blockOnGetShareNum = ^(float curNum,float openNum){
+    SWGetShareNum block = ^(float curNum,float openNum){
         curShareNum = curNum;
         openShareNum = openNum;
         weakSelf.curLab.text = [NSString stringWithFormat:@"%f",curNum];
@@ -61,33 +66,9 @@
         }
         [weakSelf setRateLabColor];
     };
-
-}
-
-- (void)seekShare:(NSString*) str{
-    if ([self.manager.blocks objectForKey:seekString]) {
-        [self.manager.blocks removeObjectForKey:seekString];
+    if (![self.manager.blocks objectForKey:lastingData.shareNum]) {
+        [self.manager.blocks setObject:block forKey:lastingData.shareNum];
     }
-    __weak typeof(self) weakSelf = self;
-    SWGetShareNum block = ^(float curNum,float openNum){
-        NSString* labStr = [NSString stringWithFormat:@"%d   %f%%",(int)curNum,(curNum-openNum)*100/openNum];
-        weakSelf.seekLab.text = labStr;
-        if (curNum-openNum>=0) {
-            weakSelf.seekLab.textColor = [UIColor redColor];
-        }else{
-            weakSelf.seekLab.textColor = [UIColor greenColor];
-        }
-    };
-    if (![self.manager.blocks objectForKey:str]) {
-        [self.manager.blocks setObject:block forKey:str];
-    }
-}
-
-- (void) setUpTextField{
-    seekString = @"sh000001";
-    self.textField.text = seekString;
-    self.textField.delegate = self;
-    [self seekShare:seekString];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -104,15 +85,11 @@
         self.totalMony.text = [self readMoney];
     }
 }
-- (IBAction)seetButtonTouch:(UIButton *)sender {
-    [self seekShare:self.textField.text];
-    seekString = self.textField.text;
-}
+
 
 - (void) find{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.manager getShareNum];
-        [self.manager getCurDataFromShareNumber:seekString];
+        [self.manager getCurDataFromShareNumber:lastingData.shareNum];
         [self find];
     });
 }
@@ -159,9 +136,9 @@
 - (float) calculateMoney{
     //1800 4000
     //风险点位
-    float centerNum = 2200;
+    float centerNum = lastingData.riskNum;
     //加仓本金
-    float money = 200;
+    float money = lastingData.addMoney;
     money = money*(openShareNum-curShareNum)*100/openShareNum;
     
     //风险点位上下 应加或减

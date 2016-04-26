@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1862237C1CCF3BF400FBB764 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1862237B1CCF3BF400FBB764 /* SetViewController.m */; };
+		1862237F1CCF3C5300FBB764 /* SetStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1862237E1CCF3C5300FBB764 /* SetStoryboard.storyboard */; };
+		186223821CCF402200FBB764 /* LastingData.m in Sources */ = {isa = PBXBuildFile; fileRef = 186223811CCF402200FBB764 /* LastingData.m */; };
 		189570951CCDB6B100BE56C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 189570941CCDB6B100BE56C5 /* main.m */; };
 		189570981CCDB6B100BE56C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 189570971CCDB6B100BE56C5 /* AppDelegate.m */; };
 		1895709B1CCDB6B100BE56C5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1895709A1CCDB6B100BE56C5 /* ViewController.m */; };
@@ -19,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1862237A1CCF3BF400FBB764 /* SetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
+		1862237B1CCF3BF400FBB764 /* SetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
+		1862237E1CCF3C5300FBB764 /* SetStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SetStoryboard.storyboard; sourceTree = "<group>"; };
+		186223801CCF402200FBB764 /* LastingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastingData.h; sourceTree = "<group>"; };
+		186223811CCF402200FBB764 /* LastingData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastingData.m; sourceTree = "<group>"; };
 		189570901CCDB6B100BE56C5 /* ShareInvest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareInvest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		189570941CCDB6B100BE56C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		189570961CCDB6B100BE56C5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -49,6 +57,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		186223791CCF3B8300FBB764 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				189570991CCDB6B100BE56C5 /* ViewController.h */,
+				1895709A1CCDB6B100BE56C5 /* ViewController.m */,
+				1862237A1CCF3BF400FBB764 /* SetViewController.h */,
+				1862237B1CCF3BF400FBB764 /* SetViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		1862237D1CCF3C0000FBB764 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				186223801CCF402200FBB764 /* LastingData.h */,
+				186223811CCF402200FBB764 /* LastingData.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		189570871CCDB6B100BE56C5 = {
 			isa = PBXGroup;
 			children = (
@@ -70,9 +98,9 @@
 		189570921CCDB6B100BE56C5 /* ShareInvest */ = {
 			isa = PBXGroup;
 			children = (
+				1862237D1CCF3C0000FBB764 /* Model */,
+				186223791CCF3B8300FBB764 /* Controller */,
 				189570AC1CCDB89A00BE56C5 /* Net */,
-				189570991CCDB6B100BE56C5 /* ViewController.h */,
-				1895709A1CCDB6B100BE56C5 /* ViewController.m */,
 				189570931CCDB6B100BE56C5 /* Supporting Files */,
 			);
 			path = ShareInvest;
@@ -89,6 +117,7 @@
 				1895709F1CCDB6B100BE56C5 /* Assets.xcassets */,
 				189570A11CCDB6B100BE56C5 /* LaunchScreen.storyboard */,
 				189570941CCDB6B100BE56C5 /* main.m */,
+				1862237E1CCF3C5300FBB764 /* SetStoryboard.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -182,6 +211,7 @@
 				189570A31CCDB6B100BE56C5 /* LaunchScreen.storyboard in Resources */,
 				189570B11CCE030200BE56C5 /* InfoPlist.strings in Resources */,
 				189570A01CCDB6B100BE56C5 /* Assets.xcassets in Resources */,
+				1862237F1CCF3C5300FBB764 /* SetStoryboard.storyboard in Resources */,
 				1895709E1CCDB6B100BE56C5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,6 +274,8 @@
 				189570AF1CCDB8DE00BE56C5 /* NetWorkManager.m in Sources */,
 				1895709B1CCDB6B100BE56C5 /* ViewController.m in Sources */,
 				189570981CCDB6B100BE56C5 /* AppDelegate.m in Sources */,
+				1862237C1CCF3BF400FBB764 /* SetViewController.m in Sources */,
+				186223821CCF402200FBB764 /* LastingData.m in Sources */,
 				189570951CCDB6B100BE56C5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
