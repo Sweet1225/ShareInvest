@@ -143,7 +143,7 @@
     
     //风险点位上下 应加或减
     float lowRiskRate = (centerNum-curShareNum)/curShareNum;
-    money = money + lowRiskRate*BASICMONEY;
+    money = money + lowRiskRate*lastingData.riskMoney;
     addMoney = money;
     return money;
 }
