@@ -100,16 +100,13 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY/MM/dd"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
-    if ([dateString isEqualToString:[self readDay]]) {
-        return;
-    }
+//    if ([dateString isEqualToString:[self readDay]]) {
+//        return;
+//    }
     NSLog(@"dateString:%@",dateString);
     
     NSDate* muDate = [self dateFromString:[NSString stringWithFormat:@"%@ 14:50:00",dateString]];
     NSTimeInterval t =  [muDate timeIntervalSinceDate:currentDate];
-    if (t<=0) {
-        t = t+60*60*24;
-    }
     [self registerLocalNotification:t];
     [self saveDay:dateString];
 }
@@ -152,7 +149,13 @@
 - (void)registerLocalNotification:(NSInteger)alertTime {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     // 设置触发通知的时间
-    NSDate *fireDate = [NSDate dateWithTimeIntervalSinceNow:alertTime];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateFormat:@"HH:mm:ss"];
+    
+    NSDate *now = [formatter dateFromString:@"14:50:00"];
+    
+    NSDate *fireDate = now;
     NSLog(@"fireDate=%@",fireDate);
     
     notification.fireDate = fireDate;
