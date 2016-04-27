@@ -63,9 +63,9 @@
             weakSelf.moneyLab.text = [NSString stringWithFormat:@"应补仓%f元",[weakSelf calculateMoney]];
         }else{
             if ([weakSelf calculateMoney]>0) {
-                weakSelf.moneyLab.text = [NSString stringWithFormat:@"现在上涨风险点位较低可以加仓%f",[weakSelf calculateMoney]];
+                weakSelf.moneyLab.text = [NSString stringWithFormat:@"现在上涨,风险点位较低可以加仓%f",[weakSelf calculateMoney]];
             }else{
-                weakSelf.moneyLab.text = [NSString stringWithFormat:@"现在上涨风险点位较高可以不动"];
+                weakSelf.moneyLab.text = [NSString stringWithFormat:@"现在上涨,风险点位较高可以不动"];
             }
 
         }
