@@ -105,9 +105,9 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY/MM/dd"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
-    if ([dateString isEqualToString:[self readDay]]) {
-        return;
-    }
+//    if ([dateString isEqualToString:[self readDay]]) {
+//        return;
+//    }
     NSLog(@"dateString:%@",dateString);
     
     NSDate* muDate = [self dateFromString:[NSString stringWithFormat:@"%@ 14:50:00",dateString]];
@@ -152,6 +152,7 @@
 
 // 设置本地通知
 - (void)registerLocalNotification:(NSInteger)alertTime {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     // 设置触发通知的时间
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
