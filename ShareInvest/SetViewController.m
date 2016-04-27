@@ -164,7 +164,6 @@
 }
 
 - (IBAction)sureTouch:(UIButton *)sender {
-
     [self saveRiskNum:[self.riskTextField.text integerValue]];
     [self saveAddMoney:[self.addMoneyTextField.text integerValue]];
     [self saveShareNum:self.shareTextField.text];

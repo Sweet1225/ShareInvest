@@ -62,7 +62,12 @@
         if (curShareNum - openShareNum<=0) {
             weakSelf.moneyLab.text = [NSString stringWithFormat:@"应补仓%f元",[weakSelf calculateMoney]];
         }else{
-            weakSelf.moneyLab.text = [NSString stringWithFormat:@"恭喜今天上涨"];
+            if ([weakSelf calculateMoney]>0) {
+                weakSelf.moneyLab.text = [NSString stringWithFormat:@"现在上涨风险点位较低可以加仓%f",[weakSelf calculateMoney]];
+            }else{
+                weakSelf.moneyLab.text = [NSString stringWithFormat:@"现在上涨风险点位较高可以不动"];
+            }
+
         }
         [weakSelf setRateLabColor];
     };
@@ -136,7 +141,7 @@
     float centerNum = lastingData.riskNum;
     //加仓本金
     float money = lastingData.addMoney;
-    money = money*(openShareNum-curShareNum)*100/openShareNum;
+    money = money*(openShareNum-curShareNum)*100/curShareNum;
     
     //风险点位上下 应加或减
     float lowRiskRate = (centerNum-curShareNum)/curShareNum;
